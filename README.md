@@ -1,5 +1,4 @@
 # forkify Project
+npm i
 npm run start
-add
-
 Recipe application with custom recipe uploads.
