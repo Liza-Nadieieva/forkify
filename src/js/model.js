@@ -13,7 +13,7 @@ export const state = {
 export const loadRecipe = async function(id) {
   try {
     const data = await getJSON(`${API_URL}${id}`);
-    
+
     const { recipe }= data.data; //distructuring recipe = data.data.recipe or {recipe} = data.data
       state.recipe = {
         id: recipe.id,
@@ -33,8 +33,9 @@ export const loadRecipe = async function(id) {
 
 export const loadSearchResults = async function(query){
   try {
+    state.search.query = query;
     const data = await getJSON(`${API_URL}?search=${query}`);
-    data.data.recipes.map(el => {
+    state.search.results = data.data.recipes.map(el => {
       return {
         id: el.id,
         title: el.title,
@@ -47,4 +48,3 @@ export const loadSearchResults = async function(query){
     throw err;
   }
 };
-loadSearchResults('pizza');
