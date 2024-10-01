@@ -1,19 +1,19 @@
 export class searchView {
-	#parentEl = document.querySelector('.search'); //form selected
+	_parentEl = document.querySelector('.search'); //form selected
 
 	getQuery() {
-		const query = this.#parentEl.querySelector('.search__field').value;
+		const query = this._parentEl.querySelector('.search__field').value;
 		 //value of input search
-		this.#clearInput();
+		this._clearInput();
 		return query;
 	}
 
-	#clearInput() {
-		this.#parentEl.querySelector('.search__field').value = '';
+	_clearInput() {
+		this._parentEl.querySelector('.search__field').value = '';
 	}
 	
 	addHandlerSearch(handler) {
-		this.#parentEl.addEventListener('submit', function (e) {
+		this._parentEl.addEventListener('submit', function (e) {
 			e.preventDefault(); // prevent upload of page
 			handler();
 		});
