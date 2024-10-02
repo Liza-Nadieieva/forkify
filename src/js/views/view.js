@@ -4,21 +4,10 @@ export default class View { //exporting class itself
 	_data;
 
 	render(data) {
+		if(!data || (Array.isArray(data) && data.length === 0)) return this.renderError()
 		this._data = data;
-
-		console.log('Incoming data:', data);
 		const markup = this._generateMarkup();
-		if (markup) {
-    console.log(`Markup exists: ${markup}`); // Логируем разметку
-		} else {
-    console.warn('Markup is empty or undefined'); // Если markup пустой или неопределённый
-		}
-
-		console.log(`Parent element:`, this._parentEl);
-
 		this._clear();
-		console.log(`list: ${markup}`);
-		console.log(`balh: ${this._parentEl}`)
 		this._parentEl.insertAdjacentHTML('afterbegin', markup);
 	}
 
