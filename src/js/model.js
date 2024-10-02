@@ -45,7 +45,6 @@ export const loadSearchResults = async function(query){
         image: el.image_url,
       }
     });
-  console.log(`1: ${state.search.results}`)
 
 
   } catch (err) {
