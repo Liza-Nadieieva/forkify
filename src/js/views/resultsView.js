@@ -24,8 +24,8 @@ class resultsView extends View {
 	                <p class="preview__publisher">${el.publisher}</p>
 	              </div>
 	            </a>
-          </li>
-	    `
+         	 </li>
+	    	`
 	}
 };
 export default new resultsView;
