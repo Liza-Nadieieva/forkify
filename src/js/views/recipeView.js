@@ -15,6 +15,16 @@ class RecipeView extends View {
     // window.addEventListener('hashchange', showRecipe);
     // window.addEventListener('load', showRecipe) //up we created an array
   }
+
+  addHandlerUpdateServings(handler) {
+    this._parentEl.addEventListener('click', function(e) {
+      const btn = e.target.closest('.btn--update-servings');
+      if(!btn) return;
+      const updateTo = +btn.dataset.updateTo; //it will be converted to camelcase
+      if(updateTo > 0) handler(updateTo);
+    });
+  }
+
   _generateMarkup = function () {
     return `
           <figure class="recipe__fig">
@@ -40,12 +50,12 @@ class RecipeView extends View {
               <span class="recipe__info-text">servings</span>
 
               <div class="recipe__info-buttons">
-                <button class="btn--tiny btn--increase-servings">
+                <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings - 1}">
                   <svg>
                     <use href="${icons}#icon-minus-circle"></use>
                   </svg>
                 </button>
-                <button class="btn--tiny btn--increase-servings">
+                <button class="btn--tiny btn--update-servings"  data-update-to="${this._data.servings + 1}">
                   <svg>
                     <use href="${icons}#icon-plus-circle"></use>
                   </svg>
@@ -90,6 +100,7 @@ class RecipeView extends View {
           </div
       `;
   };
+
   _generateMarkupIngredients = function (el) {
     return `
       <li class="recipe__ingredient">
