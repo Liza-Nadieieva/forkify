@@ -1,8 +1,8 @@
-//basically it should be the same as recipeview 
-//so that is why we create view js as parent class to reuse it elsewhere
 import View from './view.js'; //importing parent class
 import icons from 'url:../../img/icons.svg';
-
+import previewView from './previewView.js';
+//basically it should be the same as recipeview 
+//so that is why we create view js as parent class to reuse it elsewhere
 
 class resultsView extends View {
 
@@ -11,22 +11,10 @@ class resultsView extends View {
   	_errorMessage = 'No recipes found for your query! Please try again.';
 
 	_generateMarkup() {
-		return this._data.map(this._generateMarkupPreview).join('');
-	}
-	_generateMarkupPreview(el) {
-		const id = window.location.hash.slice(1);
-		return `<li class="preview">
-	            <a class="preview__link ${el.id === id ? 'preview__link--active' : ''}" href="#${el.id}">
-	              <figure class="preview__fig">
-	                <img src="${el.image}" alt="${el.title}" />
-	              </figure>
-	              <div class="preview__data">
-	                <h4 class="preview__title">${el.title}</h4>
-	                <p class="preview__publisher">${el.publisher}</p>
-	              </div>
-	            </a>
-         	 </li>
-	    	`
+		return this._data
+			.map(result => previewView
+			.render(result, false))
+			.join('');
 	}
 };
 export default new resultsView;
