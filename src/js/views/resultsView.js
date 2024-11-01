@@ -5,7 +5,6 @@ import previewView from './previewView.js';
 //so that is why we create view js as parent class to reuse it elsewhere
 
 class resultsView extends View {
-
 	_parentEl = document.querySelector('.results');
 	_successMessage = '';
   	_errorMessage = 'No recipes found for your query! Please try again.';
@@ -17,4 +16,4 @@ class resultsView extends View {
 			.join('');
 	}
 };
-export default new resultsView;
+export default new resultsView();
