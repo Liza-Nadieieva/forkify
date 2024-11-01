@@ -11,8 +11,30 @@ const timeout = function (s) {
 
 export const getJSON = async function(url){
   try {
+    const fetchPro = fetch(url);
     //loading recipe
-    const rec = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]); //after time passe promise will be replaced by error
+    const rec = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //after time passe promise will be replaced by error
+      // const rec = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e845a');
+    const data = await rec.json();
+
+    if(!rec.ok) throw new Error(`${data.message} (${rec.status})`);
+    return data;
+  } catch(err){
+    throw err;
+  }
+};
+
+export const sendJSON = async function(url, uploadData){
+  try {
+    const fetchPro = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(uploadData)
+    });
+
+    const rec = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //after time passe promise will be replaced by error
       // const rec = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e845a');
     const data = await rec.json();
 

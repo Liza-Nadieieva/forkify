@@ -50,13 +50,13 @@ export default class View { //exporting class itself
 	renderMessage(message = this._successMessage) {
 	    const markup = `
 	      <div class="message">
-	              <div>
-	                <svg>
-	                  <use href="${icons}#icon-smile></use>
-	                </svg>
-	              </div>
-	              <p>${message}</p>
-	        </div>
+          <div>
+            <svg>
+              <use href="${icons}#icon-smile"></use>
+            </svg>
+          </div>
+          <p>${message}</p>
+	      </div>
 	    `
 	    this._clear();
 	    this._parentEl.insertAdjacentHTML('afterbegin', markup);
