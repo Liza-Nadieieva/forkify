@@ -14,6 +14,12 @@
     <script defer src="src/js/controller.js"></script>
 
     <title>forkify // Search over 1,000,000 recipes</title>
+    <style>
+      .scrollable {
+        height: 200px;
+        overflow: auto; 
+      }
+    </style>
   </head>
 
   <body>
@@ -51,9 +57,9 @@
                 </svg>
                 <span>Bookmarks</span>
               </button>
-              <div class="bookmarks">
+              <div class="bookmarks scrollable">
                 <ul class="bookmarks__list">
-                  <div class="message">
+                  <!-- <div class="message">
                     <div>
                       <svg>
                         <use href="src/img/icons.svg#icon-smile"></use>
@@ -63,7 +69,7 @@
                       No bookmarks yet. Find a nice recipe and bookmark it :)
                     </p>
                   </div>
-
+ -->
                   <!-- <li class="preview">
                     <a class="preview__link" href="#23456">
                       <figure class="preview__fig">
