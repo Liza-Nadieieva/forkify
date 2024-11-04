@@ -33,6 +33,13 @@ const controlRecipes = async function() {
     //render recipe
     recipeView.renderSpinner();
     recipeView.render(model.state.recipe);
+
+    //render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    //change id in url
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+    // window.history.back()e
   } catch (err) {
     recipeView.renderError(); 
   }

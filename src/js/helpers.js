@@ -9,9 +9,16 @@ const timeout = function (s) {
   });
 }; //after time pass the promise will be rejected and changed by error 
 
-export const getJSON = async function(url){
+
+export const AJAX = async function(url, uploadData = undefined) {
   try {
-    const fetchPro = fetch(url);
+    const fetchPro = uploadData ? fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(uploadData)
+      }) : fetch(url);
     //loading recipe
     const rec = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //after time passe promise will be replaced by error
       // const rec = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e845a');
@@ -24,23 +31,38 @@ export const getJSON = async function(url){
   }
 };
 
-export const sendJSON = async function(url, uploadData){
-  try {
-    const fetchPro = fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(uploadData)
-    });
+// export const getJSON = async function(url){
+//   try {
+//     const fetchPro = fetch(url);
+//     //loading recipe
+//     const rec = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //after time passe promise will be replaced by error
+//       // const rec = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e845a');
+//     const data = await rec.json();
 
-    const rec = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //after time passe promise will be replaced by error
-      // const rec = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e845a');
-    const data = await rec.json();
+//     if(!rec.ok) throw new Error(`${data.message} (${rec.status})`);
+//     return data;
+//   } catch(err){
+//     throw err;
+//   }
+// };
 
-    if(!rec.ok) throw new Error(`${data.message} (${rec.status})`);
-    return data;
-  } catch(err){
-    throw err;
-  }
-};
+// export const sendJSON = async function(url, uploadData){
+//   try {
+//     const fetchPro = fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(uploadData)
+//     });
+
+//     const rec = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //after time passe promise will be replaced by error
+//       // const rec = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e845a');
+//     const data = await rec.json();
+
+//     if(!rec.ok) throw new Error(`${data.message} (${rec.status})`);
+//     return data;
+//   } catch(err){
+//     throw err;
+//   }
+// };
